@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wulan's Galactic Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            overflow-x: hidden;
+        }
+
+        .galaxy-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        section {
+            background-color: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid #30363d;
+            padding: 2rem;
+            margin: 2rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            background: linear-gradient(90deg, #8a2be2, #4169e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #8a2be2, #4169e1);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+
+        th {
+            background-color: #161b22;
+            font-weight: 700;
+        }
+
+        .language-button {
+            background-color: #21262d;
+            color: #8b949e;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .language-button.active {
+            background-color: #4169e1;
+            color: white;
+        }
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-indigo-500 selection:text-white">
+    <!-- Three.js Background -->
+    <div class="galaxy-background">
+        <canvas id="galaxyCanvas"></canvas>
+    </div>
+
+    <!-- Header -->
+    <header class="flex flex-col items-center justify-center h-screen text-center relative z-10 p-4">
+        <div class="absolute top-8 right-8 space-x-2">
+            <button class="language-button active" onclick="changeLanguage('id')">ID</button>
+            <button class="language-button" onclick="changeLanguage('en')">EN</button>
+            <button class="language-button" onclick="changeLanguage('jv')">JV</button>
+            <button class="language-button" onclick="changeLanguage('ar')">AR</button>
+        </div>
+        <div class="relative w-48 h-48 rounded-full overflow-hidden border-4 border-indigo-500 shadow-lg mb-4">
+            <img src="rr" alt="Avatar Wulan" class="w-full h-full object-cover">
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-2 text-white">Wulan Maulidatul Khasanah</h1>
+        <p class="text-xl md:text-2xl text-gray-400">Siswi SMK Ma'arif NU Tirto</p>
+    </header>
+
+    <main class="relative z-10 container mx-auto p-4">
+
+        <!-- Sections in multiple languages -->
+        <div class="language-content active" data-lang="id">
+            <section id="biodata">
+                <h2 class="text-3xl md:text-4xl mb-6">Biodata Diri</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p><strong>Nama:</strong> Wulan Maulidatul Khasanah</p>
+                    <p><strong>Tempat, Tanggal Lahir:</strong> Pekalongan, 26 Maret 2008</p>
+                    <p><strong>Alamat:</strong> Desa Mayangan RT27 RW09, Wiradesa, Pekalongan</p>
+                    <p><strong>Jenis Kelamin:</strong> Perempuan</p>
+                    <p><strong>Agama:</strong> Islam</p>
+                    <p><strong>Kewarganegaraan:</strong> Indonesia</p>
+                    <p><strong>Status:</strong> Pelajar</p>
+                    <p><strong>Cita-cita:</strong> Pengusaha sukses</p>
+                    <p><strong>Email:</strong> maulidatulwulan36@gmail.com</p>
+                    <p><strong>No. Telp:</strong> 085876172146</p>
+                </div>
+            </section>
+
+            <section id="pendidikan">
+                <h2 class="text-3xl md:text-4xl mb-6">Pendidikan</h2>
+                <ul class="space-y-4">
+                    <li class="card"><strong>MI Salafiyah Kauman</strong> (2014-2019)</li>
+                    <li class="card"><strong>SMP N 03 Wonokerto</strong> (2020-2023)</li>
+                    <li class="card"><strong>SMK Ma'arif NU Tirto</strong> (2024 - Sekarang)</li>
+                </ul>
+            </section>
+
+            <section id="ketrampilan">
+                <h2 class="text-3xl md:text-4xl mb-6">Keterampilan</h2>
+                <ul class="space-y-4">
+                    <li class="card">Memiliki kemampuan mendesain grafis dengan Canva</li>
+                    <li class="card">Mampu menginstal Debian 11</li>
+                    <li class="card">Mempunyai kemampuan komunikasi yang baik</li>
+                </ul>
+            </section>
+
+            <section id="pengalaman">
+                <h2 class="text-3xl md:text-4xl mb-6">Riwayat Hidup / Pengalaman</h2>
+                <ul class="space-y-4">
+                    <li class="card">Pernah Study Tour ke Semarang pada tahun 2018 dan ke Malang pada tahun 2023.</li>
+                    <li class="card">Pernah mengikuti kegiatan LDKS pada tahun 2024.</li>
+                </ul>
+            </section>
+
+            <section id="prestasi">
+                <h2 class="text-3xl md:text-4xl mb-6">Prestasi</h2>
+                <ul class="space-y-4">
+                    <li class="card">Masuk peringkat 5 besar di TPQ AN-NUR, Desa Bebel Wonokerto.</li>
+                    <li class="card">Juara 3 lomba mewarnai di desa.</li>
+                    <li class="card">Ditunjuk sebagai Ketua di TPQ AN-NUR.</li>
+                </ul>
+            </section>
+
+            <section id="hobi">
+                <h2 class="text-3xl md:text-4xl mb-6">Hobi & Minat</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl mb-4">Hobi</h3>
+                        <div class="space-y-4">
+                            <li class="card">Memasak</li>
+                            <li class="card">Berkuliner</li>
+                            <li class="card">Membaca Novel</li>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl mb-4">Visualisasi Hobi</h3>
+                        <canvas id="hobiPieChart" class="mb-4"></canvas>
+                        <canvas id="hobiRadarChart"></canvas>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">Minat</h3>
+                    <ul class="space-y-4">
+                        <li class="card">Minat di bidang membaca: Membaca ilmu tentang Finansial</li>
+                        <li class="card">Minat di bidang teknologi: Tertarik mempelajari komputer, internet, dan jaringan</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="statistik">
+                <h2 class="text-3xl md:text-4xl mb-6">Statistika Kegiatan Sehari-hari</h2>
+                <canvas id="kegiatanBarChart"></canvas>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">Analisis Data</h3>
+                    <table class="card">
+                        <thead>
+                            <tr>
+                                <th>Deskripsi</th>
+                                <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rata-rata kegiatan per hari</td>
+                                <td>20.43 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Modus Hobi</td>
+                                <td>Membaca Novel</td>
+                            </tr>
+                            <tr>
+                                <td>Persentase Prestasi Akademik</td>
+                                <td>50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="moto">
+                <h2 class="text-3xl md:text-4xl mb-6">Motto</h2>
+                <p class="text-xl md:text-2xl italic text-center">"Disiplin adalah kunci keberhasilan"</p>
+            </section>
+
+            <section id="harapan">
+                <h2 class="text-3xl md:text-4xl mb-6">Harapan Masa Depan</h2>
+                <p class="text-xl text-center">Menjadi pribadi yang sukses dalam pendidikan maupun karier.</p>
+            </section>
+
+            <section id="tabel-data">
+                <h2 class="text-3xl md:text-4xl mb-6">Tabel Data Tambahan</h2>
+                <div class="overflow-x-auto">
+                    <table class="card">
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Detail</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Prestasi</td>
+                                <td>Akademik (Peringkat 5 Besar)</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Prestasi</td>
+                                <td>Non-akademik (Lomba Mewarnai, Ketua TPQ)</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan (per minggu)</td>
+                                <td>Tidur</td>
+                                <td>56 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan (per minggu)</td>
+                                <td>Sekolah</td>
+                                <td>30 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan (per minggu)</td>
+                                <td>Belajar mandiri</td>
+                                <td>5 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan (per minggu)</td>
+                                <td>Hobi</td>
+                                <td>12 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan (per minggu)</td>
+                                <td>Membersihkan rumah</td>
+                                <td>7 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Kegiatan (per minggu)</td>
+                                <td>Lain-lain</td>
+                                <td>28 jam</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- English Content -->
+        <div class="language-content" data-lang="en">
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Personal Data</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p><strong>Name:</strong> Wulan Maulidatul Khasanah</p>
+                    <p><strong>Place, Date of Birth:</strong> Pekalongan, 26 March 2008</p>
+                    <p><strong>Address:</strong> Mayangan Village RT27 RW09, Wiradesa, Pekalongan</p>
+                    <p><strong>Gender:</strong> Female</p>
+                    <p><strong>Religion:</strong> Islam</p>
+                    <p><strong>Citizenship:</strong> Indonesian</p>
+                    <p><strong>Status:</strong> Student</p>
+                    <p><strong>Aspiration:</strong> Successful entrepreneur</p>
+                    <p><strong>Email:</strong> maulidatulwulan36@gmail.com</p>
+                    <p><strong>Phone:</strong> 085876172146</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Education</h2>
+                <ul class="space-y-4">
+                    <li class="card"><strong>MI Salafiyah Kauman</strong> (2014-2019)</li>
+                    <li class="card"><strong>SMP N 03 Wonokerto</strong> (2020-2023)</li>
+                    <li class="card"><strong>SMK Ma'arif NU Tirto</strong> (2024 - Present)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Skills</h2>
+                <ul class="space-y-4">
+                    <li class="card">Skilled in graphic design with Canva</li>
+                    <li class="card">Able to install Debian 11</li>
+                    <li class="card">Excellent communication skills</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Experience</h2>
+                <ul class="space-y-4">
+                    <li class="card">Participated in a Study Tour to Semarang in 2018 and to Malang in 2023.</li>
+                    <li class="card">Participated in the LDKS activity in 2024.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Achievements</h2>
+                <ul class="space-y-4">
+                    <li class="card">Ranked in the top 5 at TPQ AN-NUR, Bebel Wonokerto Village.</li>
+                    <li class="card">3rd place in a village coloring contest.</li>
+                    <li class="card">Appointed as Chairman at TPQ AN-NUR.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Hobbies & Interests</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl mb-4">Hobbies</h3>
+                        <div class="space-y-4">
+                            <li class="card">Cooking</li>
+                            <li class="card">Culinary exploration</li>
+                            <li class="card">Reading Novels</li>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl mb-4">Hobby Visualization</h3>
+                        <canvas id="hobiPieChartEn" class="mb-4"></canvas>
+                        <canvas id="hobiRadarChartEn"></canvas>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">Interests</h3>
+                    <ul class="space-y-4">
+                        <li class="card">Reading interest: Reading about Financial knowledge</li>
+                        <li class="card">Technology interest: Interested in learning about computers, internet, and networks</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="statistik">
+                <h2 class="text-3xl md:text-4xl mb-6">Daily Activity Statistics</h2>
+                <canvas id="kegiatanBarChartEn"></canvas>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">Data Analysis</h3>
+                    <table class="card">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Average daily activity</td>
+                                <td>20.43 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Hobby Mode</td>
+                                <td>Reading Novels</td>
+                            </tr>
+                            <tr>
+                                <td>Academic Achievement Percentage</td>
+                                <td>50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Motto</h2>
+                <p class="text-xl md:text-2xl italic text-center">"Discipline is the key to success"</p>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Future Hopes</h2>
+                <p class="text-xl text-center">To become a successful individual in both education and career.</p>
+            </section>
+        </div>
+
+        <!-- Javanese Content -->
+        <div class="language-content" data-lang="jv">
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Data Diri</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p><strong>Jeneng:</strong> Wulan Maulidatul Khasanah</p>
+                    <p><strong>Papan, Tanggal Lahir:</strong> Pekalongan, 26 Maret 2008</p>
+                    <p><strong>Alamat:</strong> Desa Mayangan RT27 RW09, Wiradesa, Pekalongan</p>
+                    <p><strong>Jenis Kelamin:</strong> Wedok</p>
+                    <p><strong>Agama:</strong> Islam</p>
+                    <p><strong>Warga Negara:</strong> Indonesia</p>
+                    <p><strong>Status:</strong> Murid</p>
+                    <p><strong>Cita-cita:</strong> Pengusaha sukses</p>
+                    <p><strong>Email:</strong> maulidatulwulan36@gmail.com</p>
+                    <p><strong>Nomer Telpon:</strong> 085876172146</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Pawiyatan</h2>
+                <ul class="space-y-4">
+                    <li class="card"><strong>MI Salafiyah Kauman</strong> (2014-2019)</li>
+                    <li class="card"><strong>SMP N 03 Wonokerto</strong> (2020-2023)</li>
+                    <li class="card"><strong>SMK Ma'arif NU Tirto</strong> (2024 - Saiki)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Katrampilan</h2>
+                <ul class="space-y-4">
+                    <li class="card">Ndhuweni katrampilan ndesain grafis nganggo canva</li>
+                    <li class="card">Bisa nginstal Debian 11</li>
+                    <li class="card">Duwe katrampilan komunikasi sing apik</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Pengalaman</h2>
+                <ul class="space-y-4">
+                    <li class="card">Tau Study Tour menyang Semarang taun 2018 lan menyang Malang taun 2023.</li>
+                    <li class="card">Tau melu kegiatan LDKS taun 2024.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Prestasi</h2>
+                <ul class="space-y-4">
+                    <li class="card">Mlebu rangking 5 gedhe ing TPQ AN-NUR, Desa Bebel Wonokerto.</li>
+                    <li class="card">Juara 3 lomba ngewarnai ing desa.</li>
+                    <li class="card">Ditunjuk dadi Ketua ing TPQ AN-NUR.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Hobi & Kapentingan</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl mb-4">Hobi</h3>
+                        <div class="space-y-4">
+                            <li class="card">Masak</li>
+                            <li class="card">Jelajah kuliner</li>
+                            <li class="card">Maca Novel</li>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl mb-4">Visualisasi Hobi</h3>
+                        <canvas id="hobiPieChartJv" class="mb-4"></canvas>
+                        <canvas id="hobiRadarChartJv"></canvas>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">Kapentingan</h3>
+                    <ul class="space-y-4">
+                        <li class="card">Seneng maca babagan ilmu Finansial</li>
+                        <li class="card">Seneng babagan teknologi: sinau babagan komputer, internet, lan jaringan</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Statistika Kegiatan Saben Dina</h2>
+                <canvas id="kegiatanBarChartJv"></canvas>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">Analisis Data</h3>
+                    <table class="card">
+                        <thead>
+                            <tr>
+                                <th>Katrangan</th>
+                                <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rata-rata kegiatan saben dina</td>
+                                <td>20.43 jam</td>
+                            </tr>
+                            <tr>
+                                <td>Modus Hobi</td>
+                                <td>Maca Novel</td>
+                            </tr>
+                            <tr>
+                                <td>Persentase Prestasi Akademik</td>
+                                <td>50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Motto</h2>
+                <p class="text-xl md:text-2xl italic text-center">"Disiplin iku kuncine keberhasilan"</p>
+            </section>
+
+            <section>
+                <h2 class="text-3xl md:text-4xl mb-6">Pangarep-arep Masa Depan</h2>
+                <p class="text-xl text-center">Dadi wong sing sukses ing pendhidhikan lan karir.</p>
+            </section>
+        </div>
+
+        <!-- Arabic Content -->
+        <div class="language-content" data-lang="ar">
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">البيانات الشخصية</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p><strong>الاسم:</strong> وولان موليداتول خاساناه</p>
+                    <p><strong>مكان وتاريخ الميلاد:</strong> بيكالونغان، 26 مارس 2008</p>
+                    <p><strong>العنوان:</strong> قرية مايانغان RT27 RW09، ويراديسا، بيكالونغان</p>
+                    <p><strong>الجنس:</strong> أنثى</p>
+                    <p><strong>الدين:</strong> الإسلام</p>
+                    <p><strong>الجنسية:</strong> إندونيسية</p>
+                    <p><strong>الحالة:</strong> طالبة</p>
+                    <p><strong>الطموح:</strong> رائدة أعمال ناجحة</p>
+                    <p><strong>البريد الإلكتروني:</strong> maulidatulwulan36@gmail.com</p>
+                    <p><strong>رقم الهاتف:</strong> 085876172146</p>
+                </div>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">التعليم</h2>
+                <ul class="space-y-4">
+                    <li class="card"><strong>مدرسة صلافية كومان</strong> (2014-2019)</li>
+                    <li class="card"><strong>مدرسة SMP N 03 وونوكيرتو</strong> (2020-2023)</li>
+                    <li class="card"><strong>مدرسة SMK معارف نو تيرتو</strong> (2024 - حتى الآن)</li>
+                </ul>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">المهارات</h2>
+                <ul class="space-y-4">
+                    <li class="card">القدرة على تصميم الجرافيك باستخدام Canva</li>
+                    <li class="card">القدرة على تثبيت Debian 11</li>
+                    <li class="card">التمتع بمهارات تواصل جيدة</li>
+                </ul>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">التاريخ الوظيفي / الخبرة</h2>
+                <ul class="space-y-4">
+                    <li class="card">قمت بجولة دراسية في سيمارانغ في عام 2018 وإلى مالانغ في عام 2023.</li>
+                    <li class="card">شاركت في نشاط LDKS في عام 2024.</li>
+                </ul>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">الإنجازات</h2>
+                <ul class="space-y-4">
+                    <li class="card">في المرتبة الخامسة في TPQ AN-NUR، قرية بيبيل وونوكيرتو.</li>
+                    <li class="card">المركز الثالث في مسابقة تلوين في القرية.</li>
+                    <li class="card">تم تعييني كرئيسة لـ TPQ AN-NUR.</li>
+                </ul>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">الهوايات والاهتمامات</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl mb-4">الهوايات</h3>
+                        <div class="space-y-4">
+                            <li class="card">الطبخ</li>
+                            <li class="card">استكشاف المأكولات</li>
+                            <li class="card">قراءة الروايات</li>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl mb-4">تصور الهوايات</h3>
+                        <canvas id="hobiPieChartAr" class="mb-4"></canvas>
+                        <canvas id="hobiRadarChartAr"></canvas>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">الاهتمامات</h3>
+                    <ul class="space-y-4">
+                        <li class="card">الاهتمام بالقراءة: قراءة عن المعرفة المالية</li>
+                        <li class="card">الاهتمام بالتكنولوجيا: مهتمة بتعلم الكمبيوتر والإنترنت والشبكات</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">إحصائيات الأنشطة اليومية</h2>
+                <canvas id="kegiatanBarChartAr"></canvas>
+                <div class="mt-8">
+                    <h3 class="text-2xl mb-4">تحليل البيانات</h3>
+                    <table class="card">
+                        <thead>
+                            <tr>
+                                <th>الوصف</th>
+                                <th>القيمة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>متوسط النشاط اليومي</td>
+                                <td>20.43 ساعة</td>
+                            </tr>
+                            <tr>
+                                <td>نمط الهواية</td>
+                                <td>قراءة الروايات</td>
+                            </tr>
+                            <tr>
+                                <td>نسبة الإنجازات الأكاديمية</td>
+                                <td>50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">الشعار</h2>
+                <p class="text-xl md:text-2xl italic text-center">"الانضباط هو مفتاح النجاح"</p>
+            </section>
+
+            <section dir="rtl">
+                <h2 class="text-3xl md:text-4xl mb-6">آمال المستقبل</h2>
+                <p class="text-xl text-center">أن أصبح شخصية ناجحة في التعليم والمسيرة المهنية.</p>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 relative z-10">
+        <p class="text-lg text-gray-400">"Menjadi pribadi yang berguna bagi sesama"</p>
+        <p class="text-sm italic text-gray-500">–Ulan</p>
+    </footer>
+
+    <script>
+        // Three.js Galaxy Background
+        const canvas = document.getElementById('galaxyCanvas');
+        const sizes = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
+        camera.position.z = 2;
+        scene.add(camera);
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true
+        });
+        renderer.setSize(sizes.width, sizes.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 5000;
+        const positions = new Float32Array(particlesCount * 3);
+        const colors = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 100;
+            positions[i + 1] = (Math.random() - 0.5) * 100;
+            positions[i + 2] = (Math.random() - 0.5) * 100;
+
+            colors[i] = Math.random();
+            colors[i + 1] = Math.random();
+            colors[i + 2] = Math.random();
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            sizeAttenuation: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            vertexColors: true
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+        const animate = () => {
+            const elapsedTime = clock.getElapsedTime();
+            particles.rotation.y = elapsedTime * 0.05;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        };
+
+        window.addEventListener('resize', () => {
+            sizes.width = window.innerWidth;
+            sizes.height = window.innerHeight;
+            camera.aspect = sizes.width / sizes.height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(sizes.width, sizes.height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        });
+
+        window.onload = function() {
+            animate();
+            setupCharts();
+        };
+
+        // Chart.js Data and Configuration
+        const hobiData = {
+            labels: ['Memasak', 'Berkuliner', 'Membaca Novel'],
+            datasets: [{
+                label: 'Persentase Hobi',
+                data: [25, 35, 40],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const hobiRadarData = {
+            labels: ['Memasak', 'Berkuliner', 'Membaca Novel', 'Finansial', 'Teknologi'],
+            datasets: [{
+                label: 'Tingkat Minat',
+                data: [8, 9, 10, 9, 8],
+                backgroundColor: 'rgba(138, 43, 226, 0.5)',
+                borderColor: 'rgba(138, 43, 226, 1)',
+                pointBackgroundColor: 'rgba(138, 43, 226, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(138, 43, 226, 1)'
+            }]
+        };
+
+        const kegiatanData = {
+            labels: ['Tidur', 'Sekolah', 'Belajar Mandiri', 'Hobi', 'Membersihkan Rumah', 'Lain-lain'],
+            datasets: [{
+                label: 'Waktu per Minggu (jam)',
+                data: [56, 30, 5, 12, 7, 28],
+                backgroundColor: 'rgba(65, 105, 225, 0.8)',
+                borderColor: 'rgba(65, 105, 225, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Chart.js Setup
+        function setupCharts() {
+            // Hobi Pie Chart (ID)
+            new Chart(document.getElementById('hobiPieChart'), {
+                type: 'pie',
+                data: hobiData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Hobi Radar Chart (ID)
+            new Chart(document.getElementById('hobiRadarChart'), {
+                type: 'radar',
+                data: hobiRadarData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#30363d'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            },
+                            pointLabels: {
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(22, 27, 34, 0.8)',
+                                color: '#c9d1d9',
+                                showLabelBackdrop: true
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Kegiatan Bar Chart (ID)
+            new Chart(document.getElementById('kegiatanBarChart'), {
+                type: 'bar',
+                data: kegiatanData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jam per Minggu',
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // English Charts
+            const hobiDataEn = {
+                labels: ['Cooking', 'Culinary Exploration', 'Reading Novels'],
+                datasets: hobiData.datasets
+            };
+            const hobiRadarDataEn = {
+                labels: ['Cooking', 'Culinary Exploration', 'Reading Novels', 'Financial', 'Technology'],
+                datasets: hobiRadarData.datasets
+            };
+            const kegiatanDataEn = {
+                labels: ['Sleep', 'School', 'Self-study', 'Hobby', 'Cleaning House', 'Others'],
+                datasets: kegiatanData.datasets
+            };
+            new Chart(document.getElementById('hobiPieChartEn'), {
+                type: 'pie',
+                data: hobiDataEn,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById('hobiRadarChartEn'), {
+                type: 'radar',
+                data: hobiRadarDataEn,
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#30363d'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            },
+                            pointLabels: {
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(22, 27, 34, 0.8)',
+                                color: '#c9d1d9',
+                                showLabelBackdrop: true
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById('kegiatanBarChartEn'), {
+                type: 'bar',
+                data: kegiatanDataEn,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Hours per Week',
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Javanese Charts
+            const hobiDataJv = {
+                labels: ['Masak', 'Jelajah Kuliner', 'Maca Novel'],
+                datasets: hobiData.datasets
+            };
+            const hobiRadarDataJv = {
+                labels: ['Masak', 'Jelajah Kuliner', 'Maca Novel', 'Finansial', 'Teknologi'],
+                datasets: hobiRadarData.datasets
+            };
+            const kegiatanDataJv = {
+                labels: ['Turu', 'Sekolah', 'Sinau Mandiri', 'Hobi', 'Resik-resik Omah', 'Liyane'],
+                datasets: kegiatanData.datasets
+            };
+            new Chart(document.getElementById('hobiPieChartJv'), {
+                type: 'pie',
+                data: hobiDataJv,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById('hobiRadarChartJv'), {
+                type: 'radar',
+                data: hobiRadarDataJv,
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#30363d'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            },
+                            pointLabels: {
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(22, 27, 34, 0.8)',
+                                color: '#c9d1d9',
+                                showLabelBackdrop: true
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById('kegiatanBarChartJv'), {
+                type: 'bar',
+                data: kegiatanDataJv,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jam per Minggu',
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Arabic Charts
+            const hobiDataAr = {
+                labels: ['الطبخ', 'استكشاف المأكولات', 'قراءة الروايات'],
+                datasets: hobiData.datasets
+            };
+            const hobiRadarDataAr = {
+                labels: ['الطبخ', 'استكشاف المأكولات', 'قراءة الروايات', 'المالية', 'التكنولوجيا'],
+                datasets: hobiRadarData.datasets
+            };
+            const kegiatanDataAr = {
+                labels: ['النوم', 'المدرسة', 'الدراسة الذاتية', 'الهواية', 'تنظيف المنزل', 'أخرى'],
+                datasets: kegiatanData.datasets
+            };
+            new Chart(document.getElementById('hobiPieChartAr'), {
+                type: 'pie',
+                data: hobiDataAr,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById('hobiRadarChartAr'), {
+                type: 'radar',
+                data: hobiRadarDataAr,
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#30363d'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            },
+                            pointLabels: {
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(22, 27, 34, 0.8)',
+                                color: '#c9d1d9',
+                                showLabelBackdrop: true
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        }
+                    }
+                }
+            });
+            new Chart(document.getElementById('kegiatanBarChartAr'), {
+                type: 'bar',
+                data: kegiatanDataAr,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'ساعة في الأسبوع',
+                                color: '#c9d1d9'
+                            },
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#c9d1d9'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('.language-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+
+            document.querySelectorAll('.language-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.language-button[onclick*="'${lang}'"]`).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
+
